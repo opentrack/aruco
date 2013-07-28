@@ -23,7 +23,7 @@ ENDIF()
 #------------------------------------------------------
 # Lib Names and Dirs
 #------------------------------------------------------
-
+include_directories(${OpenCV_INCLUDE_DIRS})
 if(WIN32)
     # Postfix of DLLs:
     SET(PROJECT_DLLVERSION "${PROJECT_VERSION_MAJOR}${PROJECT_VERSION_MINOR}${PROJECT_VERSION_PATCH}")
@@ -46,6 +46,7 @@ OPTION(BUILD_SHARED_LIBS 	"Set to OFF to build static libraries" ON)
 
 FIND_PACKAGE(OpenCV 	REQUIRED )
 set (REQUIRED_LIBRARIES ${OpenCV_LIBS})
+
 
 
 IF(EXISTS ${GLUT_PATH})
@@ -214,8 +215,8 @@ IF(CMAKE_COMPILER_IS_GNUCXX OR MINGW)
     message( STATUS "GNU COMPILER")
     MESSAGE( STATUS "-------------------------------------------------------------------------------" )
 
-    SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EXTRA_C_FLAGS}")
-    SET(CMAKE_CXX_FLAGS_RELEASE "${EXTRA_C_FLAGS_RELEASE}")
+    #SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${EXTRA_C_FLAGS}")
+    #SET(CMAKE_CXX_FLAGS_RELEASE "${EXTRA_C_FLAGS_RELEASE}")
     SET(CMAKE_CXX_FLAGS_DEBUG "${EXTRA_C_FLAGS_DEBUG}")
     SET(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${EXTRA_EXE_LINKER_FLAGS}")
     SET(CMAKE_EXE_LINKER_FLAGS_RELEASE "${CMAKE_EXE_LINKER_FLAGS_RELEASE} ${EXTRA_EXE_LINKER_FLAGS_RELEASE}")

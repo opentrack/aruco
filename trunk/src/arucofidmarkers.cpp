@@ -458,7 +458,7 @@ int FiducidalMarkers::detect(const Mat &in,int &nRotations)
     assert(in.rows==in.cols);
     Mat grey;
     if ( in.type()==CV_8UC1) grey=in;
-    else cv::cvtColor(in,grey,CV_BGR2GRAY);
+    else cv::cvtColor(in,grey,COLOR_BGR2GRAY);
     //threshold image
     threshold(grey, grey,125, 255, THRESH_BINARY|THRESH_OTSU);
 
