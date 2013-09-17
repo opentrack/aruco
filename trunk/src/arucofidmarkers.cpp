@@ -29,6 +29,7 @@ or implied, of Rafael Muñoz Salinas.
 */
 #include "arucofidmarkers.h"
 #include <opencv2/imgproc/imgproc.hpp>
+#include <cassert>
 using namespace cv;
 using namespace std;
 namespace aruco {
@@ -97,7 +98,7 @@ cv::Mat  FiducidalMarkers::createBoardImage( Size gridSize,int MarkerSize,int Ma
 
 
 
- srand(cv::getTickCount());
+ //srand(cv::getTickCount());
     int nMarkers=gridSize.height*gridSize.width;
     TInfo.resize(nMarkers);
      vector<int> ids=getListOfValidMarkersIds_random(nMarkers,excludedIds);
@@ -142,7 +143,7 @@ cv::Mat  FiducidalMarkers::createBoardImage_ChessBoard( Size gridSize,int Marker
 {
 
 
-    srand(cv::getTickCount());
+    //srand(cv::getTickCount());
 
     //determine the total number of markers required
     int nMarkers= 3*(gridSize.width*gridSize.height)/4;//overdetermine  the number of marker read
@@ -203,7 +204,7 @@ cv::Mat  FiducidalMarkers::createBoardImage_Frame( Size gridSize,int MarkerSize,
 
   
 
-    srand(cv::getTickCount());
+    //srand(cv::getTickCount());
     int nMarkers=2*gridSize.height*2*gridSize.width;
     vector<int> idsVector=getListOfValidMarkersIds_random(nMarkers,excludedIds);
 
