@@ -26,7 +26,7 @@ authors and should not be interpreted as representing official policies, either 
 or implied, of Rafael Muñoz Salinas.
 ********************************/
 #include <iostream>
-
+#include <opencv2/imgproc/types_c.h>
 #include <fstream>
 #include <sstream>
 #ifdef __APPLE__
