@@ -1,9 +1,0 @@
-This video shows the use of chessboards. You can use it with
-
->aruco_test_board chessboard.avi chessboardinfo_pix.yml intrinsics.yml 0.034
-or
->aruco_test_board chessboard.avi chessboardinfo_meters.yml intrinsics.yml
-
-
-Note: (0.034 is the size of the board when was printed. You can print your own chessboard using chessboard.pdf)
-
