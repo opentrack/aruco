@@ -105,7 +105,7 @@ public:
     * @param invert: indicates if the output projection matrix has to yield a horizontally inverted image because image data has not been stored in the order of glDrawPixels: bottom-to-top.
     */
     void glGetProjectionMatrix( cv::Size orgImgSize, cv::Size size,double proj_matrix[16],double gnear,double gfar,bool invert=false   )throw(cv::Exception);
-    
+
     /**
      * setup camera for an Ogre project.
      * 	Use:
@@ -117,7 +117,7 @@ public:
      * As in OpenGL, it assumes no camera distorsion
      */
     void OgreGetProjectionMatrix( cv::Size orgImgSize, cv::Size size,double proj_matrix[16],double gnear,double gfar,bool invert=false   )throw(cv::Exception);
-    
+
 
 private:
     //GL routines
