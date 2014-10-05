@@ -29,7 +29,8 @@ or implied, of Rafael Muñoz Salinas.
 #define _Aruco_Marker_H
 #include <vector>
 #include <iostream>
-#include <opencv2/opencv.hpp>
+#include <opencv2/core/core.hpp>
+#include <opencv2/calib3d/calib3d.hpp>
 #include "exports.h"
 #include "cameraparameters.h"
 using namespace std;
