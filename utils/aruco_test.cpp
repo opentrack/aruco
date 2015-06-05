@@ -194,9 +194,9 @@ void cvTackBarEvents(int pos,void*)
     ThresParam2=iThresParam2;
     MDetector.setThresholdParams(ThresParam1,ThresParam2);
 //recompute
-    MDetector.detect(TheInputImage,TheMarkers,TheCameraParameters);
-    TheInputImage.copyTo(TheInputImageCopy);
-    for (unsigned int i=0;i<TheMarkers.size();i++)	TheMarkers[i].draw(TheInputImageCopy,Scalar(0,0,255),1);
+    //MDetector.detect(TheInputImage,TheMarkers,TheCameraParameters);
+    //TheInputImage.copyTo(TheInputImageCopy);
+    //for (unsigned int i=0;i<TheMarkers.size();i++)	TheMarkers[i].draw(TheInputImageCopy,Scalar(0,0,255),1);
     //print other rectangles that contains no valid markers
     /*for (unsigned int i=0;i<MDetector.getCandidates().size();i++) {
         aruco::Marker m( MDetector.getCandidates()[i],999);
@@ -204,12 +204,12 @@ void cvTackBarEvents(int pos,void*)
     }*/
 
 //draw a 3d cube in each marker if there is 3d info
-    if (TheCameraParameters.isValid())
-        for (unsigned int i=0;i<TheMarkers.size();i++)
-            CvDrawingUtils::draw3dCube(TheInputImageCopy,TheMarkers[i],TheCameraParameters);
+    //if (TheCameraParameters.isValid())
+    //    for (unsigned int i=0;i<TheMarkers.size();i++)
+    //        CvDrawingUtils::draw3dCube(TheInputImageCopy,TheMarkers[i],TheCameraParameters);
 
-    cv::imshow("in",TheInputImageCopy);
-    cv::imshow("thres",MDetector.getThresholdedImage());
+    //cv::imshow("in",TheInputImageCopy);
+    //cv::imshow("thres",MDetector.getThresholdedImage());
 }
 
 
