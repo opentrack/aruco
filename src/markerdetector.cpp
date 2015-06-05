@@ -27,6 +27,7 @@ or implied, of Rafael Muñoz Salinas.
 ********************************/
 #include "markerdetector.h"
 #include <opencv/cv.h>
+#include <opencv2/imgproc/imgproc.hpp>
 #include <opencv/highgui.h>
 #include <iostream>
 #include <fstream>

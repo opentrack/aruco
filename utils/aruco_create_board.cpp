@@ -28,6 +28,7 @@ or implied, of Rafael Muñoz Salinas.
 #include "board.h"
 #include <cstdio>
 #include <opencv/cv.h>
+#include <opencv2/imgcodecs.hpp>
 #include <opencv/highgui.h>
 #include "arucofidmarkers.h"
 using namespace std;
