@@ -417,7 +417,7 @@ void MarkerDetector::thresHold ( int method,const Mat &grey,Mat &out,double para
     switch ( method )
     {
     case FIXED_THRES:
-        cv::threshold ( grey, out, param1,255, CV_THRESH_BINARY_INV );
+        cv::threshold ( grey, out, param1,255, CV_THRESH_BINARY_INV|CV_THRESH_OTSU );
         break;
     case ADPT_THRES://currently, this is the best method
 //ensure that _thresParam1%2==1
