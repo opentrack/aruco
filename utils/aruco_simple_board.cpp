@@ -28,8 +28,6 @@ or implied, of Rafael Muñoz Salinas.
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <opencv/cv.h>
-#include <opencv/highgui.h>
 #include "aruco.h"
 #include "boarddetector.h"
 #include "cvdrawingutils.h"

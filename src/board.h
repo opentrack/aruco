@@ -27,7 +27,9 @@ or implied, of Rafael Muñoz Salinas.
 ********************************/
 #ifndef _Aruco_board_h
 #define _Aruco_board_h
-#include <opencv/cv.h>
+#include <opencv2/core.hpp>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/calib3d.hpp>
 #include <string>
 #include <vector>
 #include "exports.h"
