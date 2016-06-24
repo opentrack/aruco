@@ -1,10 +1,10 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
-PROJECT(aruco)
+cmake_minimum_required(VERSION 2.6)
+project(aruco)
 
-include_directories(${OpenCV_INCLUDE_DIRS})
+#include_directories(${OpenCV_INCLUDE_DIRS})
 
-FIND_PACKAGE(OpenCV 	REQUIRED )
-set (REQUIRED_LIBRARIES ${OpenCV_LIBS})
+find_package(OpenCV REQUIRED)
+set(REQUIRED_LIBRARIES ${OpenCV_LIBS})
 
-ADD_SUBDIRECTORY(src)
-ADD_SUBDIRECTORY(utils)
+add_subdirectory(src)
+add_subdirectory(utils)
