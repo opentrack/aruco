@@ -6,5 +6,9 @@ project(aruco)
 find_package(OpenCV REQUIRED)
 set(REQUIRED_LIBRARIES ${OpenCV_LIBS})
 
+if(NOT (CMAKE_SYSTEM_NAME STREQUAL "Windows") AND CMAKE_COMPILER_IS_GNUCXX)
+    add_definitions(-fPIC)
+endif()
+
 add_subdirectory(src)
 add_subdirectory(utils)
