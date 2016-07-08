@@ -81,8 +81,6 @@ bool readArguments ( int argc,char **argv )
  ************************************/
 int main(int argc,char **argv)
 {
-    try
-    {
         if (readArguments (argc,argv)==false) {
             return 0;
         }
@@ -171,11 +169,6 @@ int main(int argc,char **argv)
             key=cv::waitKey(waitTime);//wait for key to be pressed
         }while(key!=27 && TheVideoCapturer.grab());
 
-    } catch (std::exception &ex)
-
-    {
-        cout<<"Exception :"<<ex.what()<<endl;
-    }
 
 }
 /************************************

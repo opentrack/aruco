@@ -27,7 +27,7 @@ or implied, of Rafael Muñoz Salinas.
 ********************************/
 #include "markerdetector.h"
 #include <opencv2/core.hpp>
-#include <opencv2/highgui.hpp>
+#include <opencv2/videoio.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/calib3d.hpp>
 #include <iostream>
@@ -106,7 +106,7 @@ void MarkerDetector::setDesiredSpeed ( int val )
  *
  *
  ************************************/
-void MarkerDetector::detect ( const  cv::Mat &input,std::vector<Marker> &detectedMarkers, CameraParameters camParams ,float markerSizeMeters ,bool setYPerperdicular) throw ( cv::Exception )
+void MarkerDetector::detect ( const  cv::Mat &input,std::vector<Marker> &detectedMarkers, CameraParameters camParams ,float markerSizeMeters ,bool setYPerperdicular)
 {
     detect ( input, detectedMarkers,camParams.CameraMatrix ,camParams.Distorsion,  markerSizeMeters ,setYPerperdicular);
 }
@@ -118,7 +118,7 @@ void MarkerDetector::detect ( const  cv::Mat &input,std::vector<Marker> &detecte
  *
  *
  ************************************/
-void MarkerDetector::detect ( const  cv::Mat &input,vector<Marker> &detectedMarkers,Mat camMatrix ,Mat distCoeff ,float markerSizeMeters ,bool setYPerperdicular) throw ( cv::Exception )
+void MarkerDetector::detect ( const  cv::Mat &input,vector<Marker> &detectedMarkers,Mat camMatrix ,Mat distCoeff ,float markerSizeMeters ,bool setYPerperdicular)
 {
 
 
@@ -408,13 +408,13 @@ void MarkerDetector::detectRectangles(const cv::Mat &thresImg,vector<MarkerCandi
  *
  *
  ************************************/
-void MarkerDetector::thresHold ( int method,const Mat &grey,Mat &out,double param1,double param2 ) throw ( cv::Exception )
+void MarkerDetector::thresHold ( int method,const Mat &grey,Mat &out,double param1,double param2 )
 {
 
     if (param1==-1) param1=_thresParam1;
     if (param2==-1) param2=_thresParam2;
 
-    if ( grey.type() !=CV_8UC1 )     throw cv::Exception ( 9001,"grey.type()!=CV_8UC1","MarkerDetector::thresHold",__FILE__,__LINE__ );
+    if ( grey.type() !=CV_8UC1 ) return;
     switch ( method )
     {
     case FIXED_THRES:
@@ -449,10 +449,10 @@ void MarkerDetector::thresHold ( int method,const Mat &grey,Mat &out,double para
  *
  *
  ************************************/
-bool MarkerDetector::warp ( Mat &in,Mat &out,Size size, vector<Point2f> points ) throw ( cv::Exception )
+bool MarkerDetector::warp ( Mat &in,Mat &out,Size size, vector<Point2f> points )
 {
 
-    if ( points.size() !=4 )    throw cv::Exception ( 9001,"point.size()!=4","MarkerDetector::warp",__FILE__,__LINE__ );
+    if ( points.size() !=4 ) return false;
     //obtain the perspective transform
     Point2f  pointsRes[4],pointsIn[4];
     for ( int i=0;i<4;i++ ) pointsIn[i]=points[i];
@@ -553,10 +553,10 @@ void setPointIntoImage(cv::Point  &p,cv::Size s) {
  *
  *
  ************************************/
-bool MarkerDetector::warp_cylinder ( Mat &in,Mat &out,Size size, MarkerCandidate& mcand ) throw ( cv::Exception )
+bool MarkerDetector::warp_cylinder ( Mat &in,Mat &out,Size size, MarkerCandidate& mcand )
 {
 
-    if ( mcand.size() !=4 )    throw cv::Exception ( 9001,"point.size()!=4","MarkerDetector::warp",__FILE__,__LINE__ );
+    if ( mcand.size() !=4 ) return false;
 
     //check first the real need for cylinder warping
 //     cout<<"im="<<mcand.contour.size()<<endl;
@@ -983,7 +983,7 @@ void MarkerDetector::warpPerspective(const cv::Mat &in,cv::Mat & out, const cv::
  *
  ************************************/
 
-void MarkerDetector::glGetProjectionMatrix ( CameraParameters &  CamMatrix,cv::Size orgImgSize, cv::Size size,double proj_matrix[16],double gnear,double gfar,bool invert ) throw ( cv::Exception )
+void MarkerDetector::glGetProjectionMatrix ( CameraParameters &  CamMatrix,cv::Size orgImgSize, cv::Size size,double proj_matrix[16],double gnear,double gfar,bool invert )
 {
     cerr<<"MarkerDetector::glGetProjectionMatrix . This a deprecated function. Use CameraParameters::glGetProjectionMatrix instead. "<<__FILE__<<" "<<__LINE__<<endl;
     CamMatrix.glGetProjectionMatrix ( orgImgSize,size,proj_matrix,gnear,gfar,invert );
@@ -996,11 +996,13 @@ void MarkerDetector::glGetProjectionMatrix ( CameraParameters &  CamMatrix,cv::S
 *
 ************************************/
 
-void MarkerDetector::setMinMaxSize(float min ,float max )throw(cv::Exception)
+void MarkerDetector::setMinMaxSize(float min ,float max )
 {
-    if (min<=0 || min>1) throw cv::Exception(1," min parameter out of range","MarkerDetector::setMinMaxSize",__FILE__,__LINE__);
-    if (max<=0 || max>1) throw cv::Exception(1," max parameter out of range","MarkerDetector::setMinMaxSize",__FILE__,__LINE__);
-    if (min>max) throw cv::Exception(1," min>max","MarkerDetector::setMinMaxSize",__FILE__,__LINE__);
+    if (min > 1) min = 1;
+    if (min <= 0) min = 1e-4;
+    if (max > 1) max = 1;
+    if (max <= 0) max = 1e-4;
+    if (max < min) min = max;
     _minSize=min;
     _maxSize=max;
 }

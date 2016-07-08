@@ -46,7 +46,8 @@ CameraParameters::CameraParameters() {
  * @param distorsionCoeff 4x1 matrix (k1,k2,p1,p2)
  * @param size image size
  */
-CameraParameters::CameraParameters(cv::Mat cameraMatrix,cv::Mat distorsionCoeff,cv::Size size) throw(cv::Exception) {
+CameraParameters::CameraParameters(cv::Mat cameraMatrix,cv::Mat distorsionCoeff,cv::Size size)
+{
     setParams(cameraMatrix,distorsionCoeff,size);
 }
 /**
@@ -67,13 +68,13 @@ CameraParameters & CameraParameters::operator=(const CameraParameters &CI) {
 }
 /**
  */
-void CameraParameters::setParams(cv::Mat cameraMatrix,cv::Mat distorsionCoeff,cv::Size size) throw(cv::Exception)
+void CameraParameters::setParams(cv::Mat cameraMatrix,cv::Mat distorsionCoeff,cv::Size size)
 {
     if (cameraMatrix.rows!=3 || cameraMatrix.cols!=3)
-        throw cv::Exception(9000,"invalid input cameraMatrix","CameraParameters::setParams",__FILE__,__LINE__);
+        return;
     cameraMatrix.convertTo(CameraMatrix,CV_32FC1);
     if (  distorsionCoeff.total()<4 ||  distorsionCoeff.total()>=7 )
-        throw cv::Exception(9000,"invalid input distorsionCoeff","CameraParameters::setParams",__FILE__,__LINE__);
+        return;
     cv::Mat auxD;
 
     distorsionCoeff.convertTo( Distorsion,CV_32FC1);
@@ -109,11 +110,11 @@ cv::Point3f CameraParameters::getCameraLocation(cv::Mat Rvec,cv::Mat Tvec)
 
 /**Reads the camera parameters from file
  */
-void CameraParameters::readFromFile(string path)throw(cv::Exception)
+void CameraParameters::readFromFile(string path)
 {
 
     ifstream file(path.c_str());
-    if (!file)  throw cv::Exception(9005,"could not open file:"+path,"CameraParameters::readFromFile",__FILE__,__LINE__);
+    if (!file) return;
 //Create the matrices
     Distorsion=cv::Mat::zeros(4,1,CV_32FC1);
     CameraMatrix=cv::Mat::eye(3,3,CV_32FC1);
@@ -139,12 +140,12 @@ void CameraParameters::readFromFile(string path)throw(cv::Exception)
 }
 /**Saves this to a file
   */
-void CameraParameters::saveToFile(string path,bool inXML)throw(cv::Exception)
+void CameraParameters::saveToFile(string path,bool inXML)
 {
-    if (!isValid())  throw cv::Exception(9006,"invalid object","CameraParameters::saveToFile",__FILE__,__LINE__);
+    if (!isValid()) return;
     if (!inXML) {
         ofstream file(path.c_str());
-        if (!file)  throw cv::Exception(9006,"could not open file:"+path,"CameraParameters::saveToFile",__FILE__,__LINE__);
+        if (!file) return;
         file<<"# Aruco 1.0 CameraParameters"<<endl;
         file<<"fx = "<<CameraMatrix.at<float>(0,0)<<endl;
         file<<"cx = "<<CameraMatrix.at<float>(0,2)<<endl;
@@ -168,9 +169,9 @@ void CameraParameters::saveToFile(string path,bool inXML)throw(cv::Exception)
 
 /**Adjust the parameters to the size of the image indicated
  */
-void CameraParameters::resize(cv::Size size)throw(cv::Exception)
+void CameraParameters::resize(cv::Size size)
 {
-    if (!isValid())  throw cv::Exception(9007,"invalid object","CameraParameters::resize",__FILE__,__LINE__);
+    if (!isValid()) return;
     if (size==CamSize) return;
     //now, read the camera size
     //resize the camera parameters to fit this image size
@@ -188,7 +189,7 @@ void CameraParameters::resize(cv::Size size)throw(cv::Exception)
  *
  *
  */
-void CameraParameters::readFromXMLFile(string filePath)throw(cv::Exception)
+void CameraParameters::readFromXMLFile(string filePath)
 {
     cv::FileStorage fs(filePath, cv::FileStorage::READ);
     int w=-1,h=-1;
@@ -199,13 +200,13 @@ void CameraParameters::readFromXMLFile(string filePath)throw(cv::Exception)
     fs["distortion_coefficients"] >> MDist;
     fs["camera_matrix"] >> MCamera;
 
-    if (MCamera.cols==0 || MCamera.rows==0)throw cv::Exception(9007,"File :"+filePath+" does not contains valid camera matrix","CameraParameters::readFromXML",__FILE__,__LINE__);
-    if (w==-1 || h==0)throw cv::Exception(9007,"File :"+filePath+" does not contains valid camera dimensions","CameraParameters::readFromXML",__FILE__,__LINE__);
+    if (MCamera.cols==0 || MCamera.rows==0) return;
+    if (w==-1 || h==0) return;
 
     if (MCamera.type()!=CV_32FC1) MCamera.convertTo(CameraMatrix,CV_32FC1);
     else CameraMatrix=MCamera;
 
-    if (MDist.total()<4) throw cv::Exception(9007,"File :"+filePath+" does not contains valid distortion_coefficients","CameraParameters::readFromXML",__FILE__,__LINE__);
+    if (MDist.total()<4) return;
     //convert to 32 and get the 4 first elements only
     cv::Mat mdist32;
     MDist.convertTo(mdist32,CV_32FC1);
@@ -219,11 +220,11 @@ void CameraParameters::readFromXMLFile(string filePath)throw(cv::Exception)
 /****
  *
  */
-void CameraParameters::glGetProjectionMatrix( cv::Size orgImgSize, cv::Size size,double proj_matrix[16],double gnear,double gfar,bool invert   )throw(cv::Exception)
+void CameraParameters::glGetProjectionMatrix( cv::Size orgImgSize, cv::Size size,double proj_matrix[16],double gnear,double gfar,bool invert   )
 {
 
     if (cv::countNonZero(Distorsion)!=0) std::cerr<< "CameraParameters::glGetProjectionMatrix :: The camera has distortion coefficients " <<__FILE__<<" "<<__LINE__<<endl;
-    if (isValid()==false) throw cv::Exception(9100,"invalid camera parameters","CameraParameters::glGetProjectionMatrix",__FILE__,__LINE__);
+    if (isValid()==false) return;
 
     //Deterime the rsized info
     double Ax=double(size.width)/double(orgImgSize.width);
@@ -270,7 +271,7 @@ double CameraParameters::dot( double a1, double a2, double a3,
  *
  *******************/
 
-void CameraParameters::argConvGLcpara2( double cparam[3][4], int width, int height, double gnear, double gfar, double m[16], bool invert )throw(cv::Exception)
+void CameraParameters::argConvGLcpara2( double cparam[3][4], int width, int height, double gnear, double gfar, double m[16], bool invert )
 {
 
     double   icpara[3][4];
@@ -283,7 +284,7 @@ void CameraParameters::argConvGLcpara2( double cparam[3][4], int width, int heig
     cparam[2][2] *= -1.0;
 
     if ( arParamDecompMat(cparam, icpara, trans) < 0 )
-        throw cv::Exception(9002,"parameter error","MarkerDetector::argConvGLcpara2",__FILE__,__LINE__);
+        return;
 
     for ( i = 0; i < 3; i++ )
     {
@@ -340,7 +341,7 @@ void CameraParameters::argConvGLcpara2( double cparam[3][4], int width, int heig
  *
  *******************/
 
-int CameraParameters::arParamDecompMat( double source[3][4], double cpara[3][4], double trans[3][4] )throw(cv::Exception)
+int CameraParameters::arParamDecompMat( double source[3][4], double cpara[3][4], double trans[3][4] )
 {
     int       r, c;
     double    Cpara[3][4];
@@ -421,7 +422,7 @@ int CameraParameters::arParamDecompMat( double source[3][4], double cpara[3][4],
 /******
  *
  */
-void CameraParameters::OgreGetProjectionMatrix(cv::Size orgImgSize, cv::Size size, double proj_matrix[16], double gnear, double gfar, bool invert) throw(cv::Exception)
+void CameraParameters::OgreGetProjectionMatrix(cv::Size orgImgSize, cv::Size size, double proj_matrix[16], double gnear, double gfar, bool invert)
 {
     double temp_matrix[16];
     (*this).glGetProjectionMatrix(orgImgSize, size, temp_matrix, gnear, gfar, invert);

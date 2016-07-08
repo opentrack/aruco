@@ -34,7 +34,6 @@ using namespace std;
  
 int main(int argc,char **argv)
 {
-try{
   if (argc!=4){
     
     //You can also use ids 2000-2007 but it is not safe since there are a lot of false positives.
@@ -44,11 +43,7 @@ try{
   Mat marker=aruco::FiducidalMarkers::createMarkerImage(atoi(argv[1]),atoi(argv[3]));
   cv::imwrite(argv[2],marker);
 
-}
-catch(std::exception &ex)
-{
-    cout<<ex.what()<<endl;
-}
+  return 0;
 
 }
 
