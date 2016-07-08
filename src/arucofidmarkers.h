@@ -31,7 +31,6 @@ or implied, of Rafael Muñoz Salinas.
 #include <opencv2/core/core.hpp>
 #include "exports.h"
 #include "marker.h"
-#include "board.h"
 namespace aruco {
 
 class ARUCO_EXPORTS FiducidalMarkers {
@@ -83,7 +82,7 @@ public:
       * @param TInfo output 
      * @param excludedIds set of ids excluded from the board
      */
-    static  cv::Mat createBoardImage( cv::Size  gridSize,int MarkerSize,int MarkerDistance,  BoardConfiguration& TInfo ,vector<int> *excludedIds=NULL ) throw (cv::Exception);
+    //static  cv::Mat createBoardImage( cv::Size  gridSize,int MarkerSize,int MarkerDistance,  BoardConfiguration& TInfo ,vector<int> *excludedIds=NULL );
 
 
     /**Creates a printable image of a board in chessboard_like manner
@@ -93,7 +92,7 @@ public:
      * @param setDataCentered indicates if the center is set at the center of the board. Otherwise it is the left-upper corner
      * 
      */
-    static  cv::Mat  createBoardImage_ChessBoard( cv::Size gridSize,int MarkerSize, BoardConfiguration& TInfo ,bool setDataCentered=true ,vector<int> *excludedIds=NULL) throw (cv::Exception);
+    //static  cv::Mat  createBoardImage_ChessBoard( cv::Size gridSize,int MarkerSize, BoardConfiguration& TInfo ,bool setDataCentered=true ,vector<int> *excludedIds=NULL);
 
     /**Creates a printable image of a board in a frame fashion 
      * @param gridSize grid layout (numer of sqaures in x and Y)
@@ -103,7 +102,7 @@ public:
      * @param setDataCentered indicates if the center is set at the center of the board. Otherwise it is the left-upper corner
      * 
      */
-    static  cv::Mat  createBoardImage_Frame( cv::Size gridSize,int MarkerSize,int MarkerDistance,  BoardConfiguration& TInfo ,bool setDataCentered=true,vector<int> *excludedIds=NULL ) throw (cv::Exception);
+    //static  cv::Mat  createBoardImage_Frame( cv::Size gridSize,int MarkerSize,int MarkerDistance,  BoardConfiguration& TInfo ,bool setDataCentered=true,vector<int> *excludedIds=NULL );
 
 private:
   

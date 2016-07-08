@@ -117,6 +117,7 @@ void CvDrawingUtils::draw3dCube(cv::Mat &Image,Marker &m,const CameraParameters 
  *
  *
  ****/
+#if 0
 void CvDrawingUtils::draw3dAxis(cv::Mat &Image,Board &B,const CameraParameters &CP)
 {
 Mat objectPoints (4,3,CV_32FC1);
@@ -136,6 +137,7 @@ putText(Image,"X", imagePoints[1],FONT_HERSHEY_SIMPLEX, 1, Scalar(0,0,255,255),2
 putText(Image,"Y", imagePoints[2],FONT_HERSHEY_SIMPLEX, 1, Scalar(0,255,0,255),2);
 putText(Image,"Z", imagePoints[3],FONT_HERSHEY_SIMPLEX, 1, Scalar(255,0,0,255),2);
 }
+#endif
 
 
 /****
@@ -143,6 +145,7 @@ putText(Image,"Z", imagePoints[3],FONT_HERSHEY_SIMPLEX, 1, Scalar(255,0,0,255),2
  *
  *
  ****/
+#if 0
 void CvDrawingUtils::draw3dCube(cv::Mat &Image,Board &B,const CameraParameters &CP)
 {
 
@@ -171,5 +174,6 @@ for(int i=0;i<4;i++)
 for(int i=0;i<4;i++)
   cv::line(Image,imagePoints[i],imagePoints[i+4],Scalar(0,0,255,255),1);
 }
+#endif
 
 }

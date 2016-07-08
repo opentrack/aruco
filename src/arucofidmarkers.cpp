@@ -92,8 +92,8 @@ cv::Mat FiducidalMarkers::getMarkerMat(int id) throw (cv::Exception)
  *
  *
  ************************************/
-
-cv::Mat  FiducidalMarkers::createBoardImage( Size gridSize,int MarkerSize,int MarkerDistance,  BoardConfiguration& TInfo  ,vector<int> *excludedIds) throw (cv::Exception)
+#if 0
+cv::Mat  FiducidalMarkers::createBoardImage( Size gridSize,int MarkerSize,int MarkerDistance,  BoardConfiguration& TInfo  ,vector<int> *excludedIds)
 {
 
 
@@ -139,7 +139,7 @@ cv::Mat  FiducidalMarkers::createBoardImage( Size gridSize,int MarkerSize,int Ma
  *
  *
  ************************************/
-cv::Mat  FiducidalMarkers::createBoardImage_ChessBoard( Size gridSize,int MarkerSize,  BoardConfiguration& TInfo ,bool centerData ,vector<int> *excludedIds) throw (cv::Exception)
+cv::Mat  FiducidalMarkers::createBoardImage_ChessBoard( Size gridSize,int MarkerSize,  BoardConfiguration& TInfo ,bool centerData ,vector<int> *excludedIds)
 {
 
 
@@ -168,7 +168,7 @@ cv::Mat  FiducidalMarkers::createBoardImage_ChessBoard( Size gridSize,int Marker
         for (int x=0;x<gridSize.width;x++) {
             toWrite=!toWrite;
             if (toWrite) {
-                if (CurMarkerIdx>=idsVector.size()) throw cv::Exception(999," FiducidalMarkers::createBoardImage_ChessBoard","INTERNAL ERROR. REWRITE THIS!!",__FILE__,__LINE__);
+                if (CurMarkerIdx>=idsVector.size()) return cv::Mat();
                 TInfo.push_back( MarkerInfo(idsVector[CurMarkerIdx++]));
 
                 Mat subrect(tableImage,Rect( x*MarkerSize,y*MarkerSize,MarkerSize,MarkerSize));
@@ -199,7 +199,7 @@ cv::Mat  FiducidalMarkers::createBoardImage_ChessBoard( Size gridSize,int Marker
  *
  *
  ************************************/
-cv::Mat  FiducidalMarkers::createBoardImage_Frame( Size gridSize,int MarkerSize,int MarkerDistance, BoardConfiguration& TInfo ,bool centerData,vector<int> *excludedIds ) throw (cv::Exception)
+cv::Mat  FiducidalMarkers::createBoardImage_Frame( Size gridSize,int MarkerSize,int MarkerDistance, BoardConfiguration& TInfo ,bool centerData,vector<int> *excludedIds )
 {
 
   
@@ -243,6 +243,7 @@ cv::Mat  FiducidalMarkers::createBoardImage_Frame( Size gridSize,int MarkerSize,
 
     return tableImage;
 }
+#endif
 /************************************
  *
  *
