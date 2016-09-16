@@ -1,3 +1,4 @@
+#if 0
 /*****************************
 Copyright 2011 Rafael Muñoz Salinas. All rights reserved.
 
@@ -53,3 +54,4 @@ namespace aruco
 
 #endif
 
+#endif

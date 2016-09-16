@@ -1,3 +1,4 @@
+#if 0
 /*****************************
 Copyright 2011 Rafael Muñoz Salinas. All rights reserved.
 
@@ -177,3 +178,4 @@ for(int i=0;i<4;i++)
 #endif
 
 }
+#endif
