@@ -1,4 +1,4 @@
-#if 0
+#if 1
 /*****************************
 Copyright 2011 Rafael Muñoz Salinas. All rights reserved.
 
