@@ -7,4 +7,4 @@ if(NOT (CMAKE_SYSTEM_NAME STREQUAL "Windows") AND CMAKE_COMPILER_IS_GNUCXX)
 endif()
 
 add_subdirectory(src)
-#add_subdirectory(utils)
+add_subdirectory(utils)

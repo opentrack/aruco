@@ -1,6 +1,6 @@
 project(utils)
 
-add_executable(aruco_test aruco_test.cpp)
+add_executable(aruco_test aruco_test.cpp cvdrawingutils.cpp)
 add_executable(aruco_create_marker aruco_create_marker.cpp)
 
 foreach(i aruco_test aruco_create_marker)
