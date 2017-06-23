@@ -30,8 +30,6 @@ or implied, of Rafael Muñoz Salinas.
 #include <opencv2/videoio.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/calib3d.hpp>
-#include <iostream>
-#include <fstream>
 #include <valarray>
 #include "arucofidmarkers.h"
 #include "subpixelcorner.h"
@@ -434,7 +432,10 @@ void MarkerDetector::thresHold ( int method,const Mat &grey,Mat &out,double para
         //However, some times there are small holes in the marker contour that makes
         //the contour detector not to find it properly
         //if there is a missing pixel
-        cv::Canny ( grey, out, 10, 220 );
+        contours.clear();
+        cv::Canny ( grey, out, 10, 80, param1 );
+        cv::findContours(out, contours, cv::RETR_LIST, cv::CHAIN_APPROX_SIMPLE);
+        cv::drawContours(out, contours, -1, cv::Scalar(255, 255, 255));
         //I've tried a closing but it add many more points that some
         //times makes this even worse
 // 			  Mat aux;

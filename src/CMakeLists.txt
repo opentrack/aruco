@@ -5,7 +5,6 @@ add_library(aruco STATIC ${srcs})
 
 target_include_directories(aruco SYSTEM PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_include_directories(aruco SYSTEM PUBLIC ${OpenCV_INCLUDE_DIRS})
-target_include_directories(aruco SYSTEM PUBLIC ${OpenCV_INCLUDE_DIRS})
 
 target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS})
 

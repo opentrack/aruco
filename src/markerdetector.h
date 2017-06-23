@@ -29,7 +29,6 @@ or implied, of Rafael Muñoz Salinas.
 #define _ARUCO_MarkerDetector_H
 #include <opencv2/core/core.hpp>
 #include <cstdio>
-#include <iostream>
 #include "cameraparameters.h"
 #include "exports.h"
 #include "marker.h"
@@ -269,8 +268,6 @@ public:
      */
     static void glGetProjectionMatrix( CameraParameters &  CamMatrix,cv::Size orgImgSize, cv::Size size,double proj_matrix[16],double gnear,double gfar,bool invert=false   );
 
-private:
-
     bool _enableCylinderWarp;
     bool warp_cylinder ( cv::Mat &in,cv::Mat &out,cv::Size size, MarkerCandidate& mc );
     /**
@@ -278,6 +275,7 @@ private:
     * This function returns in candidates all the rectangles found in a thresolded image
     */
     void detectRectangles(const cv::Mat &thresImg,vector<MarkerCandidate> & candidates);
+    std::vector<std::vector<cv::Point>> contours;
     //Current threshold method
     ThresholdMethods _thresMethod;
     //Threshold parameters
