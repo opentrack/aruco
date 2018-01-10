@@ -27,18 +27,17 @@ or implied, of Rafael Muñoz Salinas.
 ********************************/
 #ifndef _Aruco_Marker_H
 #define _Aruco_Marker_H
-#include <vector>
-#include <cmath>
-#include <iostream>
-#include <opencv2/core/core.hpp>
-#include <opencv2/calib3d/calib3d.hpp>
-#include <opencv2/imgproc/imgproc.hpp>
+
 #include "exports.h"
 #include "cameraparameters.h"
 
-#ifndef M_PI
-#   define     M_PI   3.14159265358979323846   /* pi */
-#endif
+#include <vector>
+#include <cmath>
+#include <iostream>
+
+#include <opencv2/core.hpp>
+#include <opencv2/calib3d.hpp>
+#include <opencv2/imgproc.hpp>
 
 using namespace std;
 namespace aruco {

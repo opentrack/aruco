@@ -435,7 +435,7 @@ void MarkerDetector::thresHold ( int method,const Mat &grey,Mat &out,double para
         contours.clear();
         cv::Canny ( grey, out, 10, 80, param1 );
         cv::findContours(out, contours, cv::RETR_LIST, cv::CHAIN_APPROX_SIMPLE);
-        cv::drawContours(out, contours, -1, cv::Scalar(255, 255, 255));
+        cv::drawContours(out, contours, -1, cv::Scalar(255, 255, 255), 4, 4);
         //I've tried a closing but it add many more points that some
         //times makes this even worse
 // 			  Mat aux;

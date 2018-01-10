@@ -26,8 +26,6 @@ authors and should not be interpreted as representing official policies, either 
 or implied, of Rafael Muñoz Salinas.
 ********************************/
 #include "marker.h"
-#undef _USE_MATH_DEFINES
-#define _USE_MATH_DEFINES
 #include <math.h>
 #include <cstdio>
 #include <cassert>
