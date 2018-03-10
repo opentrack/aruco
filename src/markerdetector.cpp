@@ -433,9 +433,9 @@ void MarkerDetector::thresHold ( int method,const Mat &grey,Mat &out,double para
         //the contour detector not to find it properly
         //if there is a missing pixel
         contours.clear();
-        cv::Canny ( grey, out, 10, 80, param1 );
+        cv::Canny ( grey, out, param1, param2, 5, true );
         cv::findContours(out, contours, cv::RETR_LIST, cv::CHAIN_APPROX_SIMPLE);
-        cv::drawContours(out, contours, -1, cv::Scalar(255, 255, 255), 4, 4);
+        cv::drawContours(out, contours, -1, cv::Scalar(255, 255, 255), 2, cv::LINE_4);
         //I've tried a closing but it add many more points that some
         //times makes this even worse
 // 			  Mat aux;
