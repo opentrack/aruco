@@ -14,7 +14,7 @@ SubPixelCorner::SubPixelCorner()
     _apertureSize=3;
     _term.maxCount=10;
     _term.epsilon=0.1;
-    _term.type=CV_TERMCRIT_ITER | CV_TERMCRIT_EPS;
+    _term.type=cv::TermCriteria::MAX_ITER | cv::TermCriteria::EPS;
      enable=true;
 }
 
@@ -22,19 +22,19 @@ void SubPixelCorner::checkTerm()
 {
     switch( _term.type)
     {
-    case CV_TERMCRIT_ITER:
+    case cv::TermCriteria::MAX_ITER:
         _term.epsilon = 0.f;
         _term.maxCount;
         break;
-    case CV_TERMCRIT_EPS:
+    case cv::TermCriteria::EPS:
         _term.maxCount=_term.COUNT;
         break;
-    case CV_TERMCRIT_ITER | CV_TERMCRIT_EPS:
+    case cv::TermCriteria::MAX_ITER | cv::TermCriteria::EPS:
         break;
     default:
         _term.maxCount=_term.COUNT;
         _term.epsilon=0.1;
-        _term.type=CV_TERMCRIT_ITER | CV_TERMCRIT_EPS;
+        _term.type=cv::TermCriteria::MAX_ITER | cv::TermCriteria::EPS;
     break;
     }
 
