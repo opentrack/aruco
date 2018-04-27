@@ -35,6 +35,12 @@ namespace aruco {
 /**
  *
  */
+
+extern "C" ARUCO_EXPORTS void aruco_opentrack_fork_abi_0(void)
+{
+    (void)0;
+}
+
 Marker::Marker()
 {
     id=-1;
