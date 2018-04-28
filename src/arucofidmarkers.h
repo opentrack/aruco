@@ -33,6 +33,9 @@ or implied, of Rafael Muñoz Salinas.
 #include "marker.h"
 namespace aruco {
 
+using namespace std;
+using namespace cv;
+
 class ARUCO_EXPORTS FiducidalMarkers {
 public:
     /**

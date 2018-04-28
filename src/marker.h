@@ -39,8 +39,9 @@ or implied, of Rafael Muñoz Salinas.
 #include <opencv2/calib3d.hpp>
 #include <opencv2/imgproc.hpp>
 
-using namespace std;
 namespace aruco {
+using namespace std;
+using namespace cv;
 /**\brief This class represents a marker. It is a vector of the fours corners ot the marker
  *
  */

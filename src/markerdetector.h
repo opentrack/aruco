@@ -32,11 +32,11 @@ or implied, of Rafael Muñoz Salinas.
 #include "cameraparameters.h"
 #include "exports.h"
 #include "marker.h"
-using namespace std;
 
 namespace aruco
 {
-
+using namespace std;
+using namespace cv;
 /**\brief Main class for marker detection
  *
  */
