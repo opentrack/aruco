@@ -36,7 +36,7 @@ namespace aruco {
  *
  */
 
-extern "C" ARUCO_EXPORTS void aruco_opentrack_fork_abi_0(void)
+extern "C" ARUCO_EXPORTS void aruco_opentrack_fork_abi_1(void)
 {
     (void)0;
 }
