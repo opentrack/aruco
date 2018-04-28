@@ -26,21 +26,24 @@ authors and should not be interpreted as representing official policies, either 
 or implied, of Rafael Muñoz Salinas.
 ********************************/
 
+#pragma once
 
+#undef _CRT_SECURE_NO_DEPRECATE
+#define _CRT_SECURE_NO_DEPRECATE
 
-#ifndef __OPENARUCO_CORE_TYPES_H__
-#define __OPENARUCO_CORE_TYPES_H__
-
-#if !defined _CRT_SECURE_NO_DEPRECATE && _MSC_VER > 1300
-#define _CRT_SECURE_NO_DEPRECATE /* to avoid multiple Visual Studio 2005 warnings */
-#endif
-
-
-#if ((defined WIN32 || defined _WIN32 || defined WINCE)   && defined DSO_EXPORTS) || defined(_MSC_VER)
-     #define ARUCO_EXPORTS __declspec(dllexport)
+#if defined ARUCO_STATIC
+#   define ARUCO_EXPORTS
+#elif !defined ARUCO_BUILD
+#   if defined _WIN32
+#       define ARUCO_EXPORTS __declspec(dllimport)
+#   else
+#       define ARUCO_EXPORTS
+#   endif
 #else
-    #define ARUCO_EXPORTS __attribute__ ((visibility ("default")))
+#   if defined _WIN32
+#       define ARUCO_EXPORTS __declspec(dllexport)
+#   else
+        #define ARUCO_EXPORTS __attribute__ ((visibility ("default")))
+#   endif
 #endif
 
-
-#endif

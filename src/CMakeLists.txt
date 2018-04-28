@@ -1,10 +1,13 @@
 project(aruco)
 
+add_definitions(-DARUCO_BUILD)
+
 if(WIN32)
     add_definitions(-D_USE_MATH_DEFINES -DNOMINMAX)
 endif()
 
 file(GLOB srcs "*.c" "*.cpp" "*.h" "*.hpp")
+
 add_library(aruco STATIC ${srcs})
 
 target_include_directories(aruco SYSTEM PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
