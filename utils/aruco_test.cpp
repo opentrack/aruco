@@ -49,6 +49,7 @@ pair<double,double> AvrgTime(0,0) ;//determines the average time required for de
 double ThresParam1,ThresParam2;
 int iThresParam1,iThresParam2;
 int waitTime=0;
+int camera_id = 0;
 
 /************************************
  *
@@ -65,9 +66,7 @@ bool readArguments ( int argc,char **argv )
     }
     TheInputVideo=argv[1];
     if (argc>=3)
-        TheIntrinsicFile=argv[2];
-    if (argc>=4)
-        TheMarkerSize=atof(argv[3]);
+        camera_id = atoi(argv[2]);
 
     if (argc==3)
         cerr<<"NOTE: You need makersize to see 3d info!!!!"<<endl;
@@ -88,7 +87,7 @@ int main(int argc,char **argv)
         ;
         //read from camera or from  file
         if (TheInputVideo=="live") {
-            TheVideoCapturer.open(0);
+            TheVideoCapturer.open(camera_id);
             waitTime=10;
         }
         else  TheVideoCapturer.open(TheInputVideo);
