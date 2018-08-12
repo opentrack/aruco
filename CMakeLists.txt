@@ -3,6 +3,10 @@ project(aruco)
 
 find_package(OpenCV REQUIRED)
 
+if(WIN32)
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+endif()
+
 if(NOT (CMAKE_SYSTEM_NAME STREQUAL "Windows") AND CMAKE_COMPILER_IS_GNUCXX)
     add_definitions(-fPIC)
 endif()

@@ -25,6 +25,7 @@ The views and conclusions contained in the software and documentation are those 
 authors and should not be interpreted as representing official policies, either expressed
 or implied, of Rafael Muñoz Salinas.
 ********************************/
+#include "aruco.h"
 #include "marker.h"
 #include <math.h>
 #include <cstdio>
@@ -35,11 +36,6 @@ namespace aruco {
 /**
  *
  */
-
-extern "C" ARUCO_EXPORTS void aruco_opentrack_fork_abi_1(void)
-{
-    (void)0;
-}
 
 Marker::Marker()
 {
