@@ -12,6 +12,12 @@ set(CMAKE_CXX_EXTENSIONS FALSE)
 
 add_definitions(-DARUCO_STATIC)
 
+foreach(k CMP0083)
+    if(POLICY ${k})
+        cmake_policy(SET ${k} NEW)
+    endif()
+endforeach()
+
 find_package(OpenCV REQUIRED)
 
 if(WIN32)
