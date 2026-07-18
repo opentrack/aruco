@@ -13,7 +13,14 @@ add_library(aruco STATIC ${srcs})
 target_include_directories(aruco SYSTEM PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}")
 target_include_directories(aruco SYSTEM PUBLIC "${OpenCV_INCLUDE_DIRS}")
 
-target_link_libraries(${PROJECT_NAME} opencv_core opencv_calib3d opencv_imgproc)
+
+target_link_libraries(${PROJECT_NAME} PUBLIC opencv_core opencv_imgproc)
+
+if(TARGET opencv_calib3d)
+    target_link_libraries(${PROJECT_NAME} PUBLIC opencv_calib3d)
+else()
+    target_link_libraries(${PROJECT_NAME} PUBLIC opencv_calib)
+endif()
 
 set(perms PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)
 set(perms2 ${perms} OWNER_EXECUTE GROUP_EXECUTE WORLD_EXECUTE)

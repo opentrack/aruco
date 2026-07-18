@@ -4,9 +4,8 @@ add_executable(aruco_test aruco_test.cpp cvdrawingutils.cpp)
 add_executable(aruco_create_marker aruco_create_marker.cpp)
 
 foreach(i aruco_test aruco_create_marker)
-    target_include_directories(${i} SYSTEM PRIVATE ${OpenCV_INCLUDE_DIRS})
-    target_include_directories(${i} SYSTEM PRIVATE ${PROJECT_SOURCE_DIR}/src)
-    target_link_libraries(${i} aruco ${OpenCV_LIBS})
+    target_include_directories(${i} PRIVATE ${PROJECT_SOURCE_DIR}/../src)
+    target_link_libraries(${i} PRIVATE aruco opencv_videoio opencv_highgui)
 endforeach()
 
 #add_executable(aruco_simple aruco_simple.cpp)

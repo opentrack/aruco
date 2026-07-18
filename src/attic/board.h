@@ -29,7 +29,11 @@ or implied, of Rafael Muñoz Salinas.
 #define _Aruco_board_h
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
-#include <opencv2/calib3d.hpp>
+#if __has_include(<opencv2/calib3d.hpp>)
+#   include <opencv2/calib3d.hpp>
+#else
+#   include <opencv2/calib.hpp>
+#endif
 #include <string>
 #include <vector>
 #include "exports.h"
